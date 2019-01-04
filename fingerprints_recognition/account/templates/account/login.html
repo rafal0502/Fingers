@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+    <h1>Logowanie</h1>
+    <p>Wypełnij formularz, aby się zalogować. Jeżeli nie masz jeszcze konta, możesz utworzyć je <a href="{% url "register" %}">tutaj</a></p>
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Zaloguj"/></p>
+    </form>
+{% endblock %}
+

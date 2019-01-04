@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Panel główny{% endblock %}
+
+{% block content %}
+    <h1>Panel główny</h1>
+    <p>Witaj w panelu głównym {{ user.first_name }}</p>
+
+     <p>Twoje odciski palców:</p>
+    <img src="{{ user.profile.fingerprint_photo_1.url }}" width="300">
+    <img src="{{ user.profile.fingerprint_photo_2.url }}" width="300">
+    <img src="{{ user.profile.fingerprint_photo_3.url }}" width="300">
+    <img src="{{ user.profile.fingerprint_photo_4.url }}" width="300">
+{% endblock %}
