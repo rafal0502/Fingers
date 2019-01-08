@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 from PIL import Image
 from scipy.ndimage import gaussian_filter
 import differint.differint as df
+from skimage.morphology import skeletonize, thin
 import cv2
 
 pic = Image.open('database/101_1.tif')
@@ -108,10 +109,13 @@ def load_img():
     return img
 
 
-def show_img(image):
-    plt.imshow(image)
-    plt.show()
-
+def show_img(image, cmap=None):
+    if cmap:
+        plt.imshow(image, cmap)
+        plt.show()
+    else:
+        plt.imshow(image)
+        plt.show()
 
 fingerprint = load_img()
 show_img(fingerprint)
@@ -209,6 +213,9 @@ plt.show()
 
 # Fingerprint Harris
 img = cv2.imread('101_1.tif')
+img_gray = cv2.imread('101_1.tif',0) # grayscale
+show_img(img)
+show_img(img_gray,cmap='gray')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -219,8 +226,45 @@ plt.show()
 plt.imshow(img, cmap='gray')
 plt.show()
 
-
+# wczytanie w szarości
 gray = np.float32(img_gray)
+
+#
+# Otsu's thresholding after Gaussian filtering
+blur = cv2.GaussianBlur(img_gray, (5,5), 0)
+plt.imshow(blur, cmap='gray')
+plt.show()
+
+# global thresholding
+ret1, th1 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)
+show_img(th1,cmap='gray')
+
+# Otsu's thresholding
+ret2,th2 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+show_img(th2, cmap='gray')
+
+
+ret, img0 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+show_img(img0,cmap='gray')
+
+# dlaczego polaczenie tresh binary i otsu?
+# Otsu's thresholding after Gaussian filtering
+blur = cv2.GaussianBlur(img,(5,5),0)
+ret3, th3 = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+show_img(th3,cmap='gray')
+
+# szkieletyzacja
+keleton = skeletonize(th2) # => nie mozna wykonac szkieletyzacji bo nie sa same 0 i 1
+# Normalize to 0 and 1 range
+th2[th2 == 255] = 1
+skeleton = skeletonize(th2)
+show_img(skeleton, cmap='gray')
+# to u niego w kjanko -> po co to
+#skeleton = numpy.array(skeleton, dtype=numpy.uint8)
+#skeleton = removedot(skeleton)
+
+
+
 # blocksize= neigbourhood size, ksize=sobol operator kernel size, harrisdetectorfree paramater
 dst = cv2.cornerHarris(src=gray, blockSize=2, ksize=3, k=0.04)
 dst = cv2.dilate(dst, None)
