@@ -12,7 +12,7 @@ from keras.utils import np_utils
 from keras import backend as K
 
 batch_size = 10
-nb_classes = 2
+nb_classes = 8
 nb_epoch = 20
 
 

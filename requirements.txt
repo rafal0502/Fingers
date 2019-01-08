@@ -1,17 +1,13 @@
-<<<<<<< HEAD
 numpy
 tkinter
 opencv-python==3.3.0.10 opencv-contrib-python==3.3.0.10
 python3-tk
 scipy
 numpy==1.11.0
-
-
-
-=======
-opencv-python
 tkinter
 scikit-image
 Django==1.8.6
 Pillow==2.9.0
->>>>>>> 77d93ab583a40ca3f556db62f8601d3cd25e83d2
+glob
+pandas
+matplotlib

@@ -4,19 +4,17 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-<<<<<<< HEAD
-          <list size="5">
-            <item index="0" class="java.lang.String" itemvalue="python-opencv" />
-            <item index="1" class="java.lang.String" itemvalue="tkinter" />
-            <item index="2" class="java.lang.String" itemvalue="python3-tk" />
-            <item index="3" class="java.lang.String" itemvalue="scipy" />
-            <item index="4" class="java.lang.String" itemvalue="numpy" />
-=======
-          <list size="3">
+          <list size="10">
             <item index="0" class="java.lang.String" itemvalue="tkinter" />
-            <item index="1" class="java.lang.String" itemvalue="Django" />
-            <item index="2" class="java.lang.String" itemvalue="Pillow" />
->>>>>>> 77d93ab583a40ca3f556db62f8601d3cd25e83d2
+            <item index="1" class="java.lang.String" itemvalue="python3-tk" />
+            <item index="2" class="java.lang.String" itemvalue="numpy" />
+            <item index="3" class="java.lang.String" itemvalue="Pillow" />
+            <item index="4" class="java.lang.String" itemvalue="scikit-image" />
+            <item index="5" class="java.lang.String" itemvalue="scipy" />
+            <item index="6" class="java.lang.String" itemvalue="Django" />
+            <item index="7" class="java.lang.String" itemvalue="glob" />
+            <item index="8" class="java.lang.String" itemvalue="pandas" />
+            <item index="9" class="java.lang.String" itemvalue="matplotlib" />
           </list>
         </value>
       </option>

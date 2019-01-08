@@ -27,13 +27,15 @@ def gaussian(x, alpha, r):
    return 1. / (math.sqrt(alpha ** math.pi)) * np.exp(-alpha * np.power((x - r), 2.))
 
 
-x = np.linspace(-3, 3, 100)
+x = np.linspace(1, 4, 9)
 plt.plot(x, gaussian(x, 1, 0))
 plt.show()
 
 
-gaussian_matrix = gaussian(x, 1, 0)
-print(gaussian_matrix)
+gaussian_matrix = gaussian(x, 1, 0).reshape(3,3)
+print(gaussian(x, 1, 0))
+
+
 DF = df.RL(0.5, gaussian(x, 1, 0))
 print(DF)
 plt.plot(x, DF)
@@ -70,3 +72,22 @@ def gaussian_kernel(size, size_y=None):
    return g / g.sum()
 
 print(gaussian_kernel(5))
+
+
+from scipy.ndimage import gaussian_filter
+a = np.ones(9).reshape((3, 3))
+kernel = np.matrix([[1, 2, 1], [2, 4, 2], [1, 2, 1]])
+print(a)
+x = gaussian_filter(kernel, sigma=-2)
+print(x)
+
+DF = df.RL(0.5, kernel, 1, 5, 3)
+print(DF)
+
+
+def f(x):
+   return x
+
+
+DF = df.RLpoint(0.5, f)
+print(DF)
